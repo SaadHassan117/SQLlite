@@ -1,4 +1,4 @@
-package com.example.assignment03;
+  package com.example.assignment03;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button add, show;
+    Button add, show,del;
     EditText name, id;
     Switch actives;
     ListView list;
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         show=findViewById(R.id.button2);
         actives=findViewById(R.id.switch1);
         list=findViewById(R.id.liste);
+        del=findViewById(R.id.button3);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
                 List<Student> liste = dbHelper.getAllStudents();
                 ArrayAdapter arrayAdapter = new ArrayAdapter<Student>(MainActivity.this, android.R.layout.simple_list_item_1,liste);
                 list.setAdapter(arrayAdapter);
+            }
+        });
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(MainActivity.this);
+                dbHelper.delet(name.getText().toString());
+
             }
         });
     }

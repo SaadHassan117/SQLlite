@@ -70,8 +70,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
         }
 
+
         cursorCourses.close();
         return studentArrayList;
     }
+        public boolean delet (String name)
+        {
+            SQLiteDatabase dbe = this.getWritableDatabase();
+            Cursor c = dbe.rawQuery("select * from STUDENT_TABLE where STUDENT_NAME=?", new String[]{name});
+            if (c.getCount() > 0) {
+                dbe.delete("STUDENT_TABLE", "STUDENT_NAME=?", new String[]{name});
+                return true;
+            } else
+                return false;
+        }
+
+
 }
 
